@@ -1,0 +1,21 @@
+[Unit]
+Description=Wanderlog read-only MCP server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+WorkingDirectory=/opt/wanderlog-mcp
+Environment=NODE_ENV=production HOST=127.0.0.1 PORT=18747 MCP_REQUIRE_AUTH=true
+EnvironmentFile=/etc/wanderlog-mcp.env
+ExecStart=/opt/wanderlog-mcp/bin/node /opt/wanderlog-mcp/src/http.js
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+
+[Install]
+WantedBy=multi-user.target

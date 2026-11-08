@@ -1,0 +1,21 @@
+{
+  "name": "wanderlog-shared-reader",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "description": "Read a Wanderlog shared itinerary on demand via MCP or the command line",
+  "scripts": {
+    "start": "node src/server.js",
+    "start:http": "node src/http.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "jose": "^6.2.15",
+    "zod": "^4.6.7"
+  }
+}

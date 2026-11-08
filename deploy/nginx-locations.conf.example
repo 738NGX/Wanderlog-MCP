@@ -1,0 +1,19 @@
+# Add to an existing TLS server block for mcp.738ngx.site after configuring
+# an origin certificate and Cloudflare Full (strict), or a secure tunnel.
+# Do not publish an HTTP-only origin or forward TLS-protected tokens over HTTP.
+location = /wanderlog/mcp {
+    access_log off;
+    proxy_pass http://127.0.0.1:18747;
+    proxy_set_header Host $host;
+    proxy_set_header Authorization $http_authorization;
+    proxy_http_version 1.1;
+    proxy_buffering off;
+    proxy_read_timeout 45s;
+}
+
+# MCP protected-resource discovery is at the origin root, not under /wanderlog/.
+location = /.well-known/oauth-protected-resource/wanderlog/mcp {
+    access_log off;
+    proxy_pass http://127.0.0.1:18747;
+    proxy_set_header Host $host;
+}
